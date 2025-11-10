@@ -1,16 +1,14 @@
 package com.chatAssistant.service;
 
 import org.springframework.ai.chat.ChatClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChatService {
 
-    private final ChatClient chatClient;
-
-    public ChatService(ChatClient chatClient) {
-        this.chatClient = chatClient;
-    }
+    @Autowired
+    private ChatClient chatClient;
 
     public String getChatResponse(String userMessage) {
         String prompt = """
