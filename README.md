@@ -36,12 +36,5 @@ arduino
 Copy code
 http://localhost:8081
 
-👨‍💻 Author
-📧 uday.techielife@hotmail.com
+👨‍💻 Author: uday.techielife@hotmail.com
 
-yaml
-Copy code
-
----
-
-Would you like me to add a **one-line project description** at the top (like “AI-powered chat app using Spring Boot + OpenRouter”) for the GitHub repository summary?
