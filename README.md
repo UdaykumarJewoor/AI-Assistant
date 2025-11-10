@@ -25,10 +25,10 @@ Set your API key
 Run the application
 
 ./gradlew bootRun
+
 Open in your browser
 
-arduino
-Copy code
+
 http://localhost:8081
 
 👨‍💻 Author: uday.techielife@hotmail.com
