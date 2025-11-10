@@ -5,157 +5,261 @@
     <title>AI Chat Assistant</title>
     <style>
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f4f7fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+          font-family: "Poppins", Arial, sans-serif;
+          background: linear-gradient(135deg, #00c6ff, #ff7e5f);
+          height: 100vh;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+          overflow: hidden;
+          transition: background 0.8s ease;
         }
 
+        /* --- Intro Section --- */
+        .intro-container {
+          text-align: center;
+          width: 480px;
+          background: rgba(255, 255, 255, 0.15);
+          padding: 40px 30px;
+          border-radius: 18px;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+          animation: fadeIn 0.6s ease-in-out;
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .intro-container.hide {
+          opacity: 0;
+          transform: scale(0.9);
+          pointer-events: none;
+        }
+
+        .intro-container h1 {
+          font-size: 30px;
+          margin-bottom: 15px;
+          color: #fff;
+          letter-spacing: 0.5px;
+        }
+
+        .intro-container p {
+          font-size: 15px;
+          line-height: 1.6;
+          color: #f1f1f1;
+          margin-bottom: 30px;
+        }
+
+        .intro-container button {
+          background: linear-gradient(90deg, #ff7e5f, #feb47b);
+          border: none;
+          padding: 12px 25px;
+          border-radius: 10px;
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .intro-container button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* --- Chat Section --- */
         .chat-container {
-            width: 500px;
-            height: 600px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+          width: 380px;
+          height: 520px;
+          background: #fff;
+          border-radius: 20px;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          border: 1px solid #ddd;
+          opacity: 0;
+          transform: translateY(50px);
+          transition: all 0.6s ease;
+          position: absolute;
+          pointer-events: none;
+        }
+
+        .chat-container.active {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: all;
         }
 
         .chat-header {
-            background-color: #0078ff;
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
+          background: linear-gradient(90deg, #43cea2, #185a9d);
+          color: white;
+          padding: 15px;
+          font-size: 18px;
+          font-weight: 600;
+          text-align: center;
+          letter-spacing: 0.5px;
         }
 
         .chat-box {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background-color: #fafafa;
+          flex: 1;
+          padding: 15px;
+          overflow-y: auto;
+          background-color: #f5f9ff;
+          scroll-behavior: smooth;
         }
 
         .message {
-            margin: 10px 0;
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 12px;
-            word-wrap: break-word;
+          margin: 8px 0;
+          padding: 10px 14px;
+          border-radius: 16px;
+          word-wrap: break-word;
+          max-width: 80%;
+          font-size: 14px;
+          line-height: 1.4;
+          transition: all 0.2s ease-in-out;
         }
 
         .user {
-            background-color: #0078ff;
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 0;
+          background-color: #43cea2;
+          color: white;
+          margin-left: auto;
+          border-bottom-right-radius: 0;
         }
 
         .ai {
-            background-color: #e6e6e6;
-            color: #222;
-            margin-right: auto;
-            border-bottom-left-radius: 0;
+          background-color: #ffecd2;
+          color: #333;
+          margin-right: auto;
+          border-bottom-left-radius: 0;
+          border: 1px solid #ffe0b2;
         }
 
         .input-area {
-            display: flex;
-            border-top: 1px solid #ddd;
-            padding: 10px;
-            background: white;
+          display: flex;
+          border-top: 1px solid #eee;
+          padding: 10px;
+          background: #fff;
         }
 
         textarea {
-            flex: 1;
-            resize: none;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
+          flex: 1;
+          resize: none;
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          outline: none;
+          transition: border 0.2s ease;
         }
 
-        button {
-            background-color: #0078ff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin-left: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+        textarea:focus {
+          border-color: #43cea2;
         }
 
-        button:hover {
-            background-color: #005fcc;
+        button.send-btn {
+          background: linear-gradient(90deg, #43cea2, #185a9d);
+          color: white;
+          border: none;
+          padding: 10px 18px;
+          margin-left: 8px;
+          border-radius: 10px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button.send-btn:hover {
+          transform: scale(1.05);
+          box-shadow: 0 4px 10px rgba(24, 90, 157, 0.4);
         }
 
         .thinking {
-            color: #888;
-            font-style: italic;
+          color: #888;
+          font-style: italic;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
 <body>
-<div class="chat-container">
-    <div class="chat-header">💬 AI Chat Assistant</div>
+
+<!-- Intro Section -->
+<div class="intro-container" id="intro">
+    <h1>🤖 AI Chat Assistant</h1>
+    <p>
+        Welcome to your smart AI Chat Assistant!
+        This assistant helps you with questions, creative ideas, and coding assistance.
+        <br><br>
+        Click below to start chatting and experience AI in action.
+    </p>
+    <button onclick="startChat()">🚀 Get Started</button>
+</div>
+
+<!-- Chat Section -->
+<div class="chat-container" id="chatContainer">
+    <div class="chat-header">🤖 AI Chat Assistant</div>
     <div class="chat-box" id="chatBox"></div>
     <div class="input-area">
-        <textarea id="userInput" placeholder="Type your question..." onkeydown="checkEnter(event)"></textarea>
-        <button onclick="sendMessage()">Send</button>
+        <textarea id="userInput" placeholder="Type your message..." onkeydown="checkEnter(event)"></textarea>
+        <button class="send-btn" onclick="sendMessage()">Send</button>
     </div>
 </div>
 
 <script>
+    const chatContainer = document.getElementById("chatContainer");
+    const intro = document.getElementById("intro");
     const chatBox = document.getElementById("chatBox");
     const userInput = document.getElementById("userInput");
 
+    function startChat() {
+      // fade out intro, fade in chat
+      intro.classList.add("hide");
+      setTimeout(() => {
+        intro.style.display = "none";
+        chatContainer.classList.add("active");
+      }, 500);
+    }
+
     async function sendMessage() {
-        const message = userInput.value.trim();
-        if (!message) return;
+      const message = userInput.value.trim();
+      if (!message) return;
 
-        // Display user message
-        appendMessage("user", message);
-        userInput.value = "";
+      appendMessage("user", message);
+      userInput.value = "";
 
-        // Display thinking message
-        const thinkingMsg = appendMessage("ai", "Thinking...");
+      const thinkingMsg = appendMessage("ai", "Thinking...");
 
-        // Send to backend
-        const res = await fetch("/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message })
-        });
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      });
 
-        const data = await res.json();
-
-        // Replace thinking message with actual AI response
-        thinkingMsg.innerHTML = data.response;
-        thinkingMsg.classList.remove("thinking");
-
-        chatBox.scrollTop = chatBox.scrollHeight;
+      const data = await res.json();
+      thinkingMsg.innerHTML = data.response;
+      thinkingMsg.classList.remove("thinking");
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     function appendMessage(sender, text) {
-        const msgDiv = document.createElement("div");
-        msgDiv.classList.add("message", sender);
-        msgDiv.innerHTML = text;
-        if (sender === "ai" && text === "Thinking...") msgDiv.classList.add("thinking");
-        chatBox.appendChild(msgDiv);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        return msgDiv;
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("message", sender);
+      msgDiv.innerHTML = text;
+      if (sender === "ai" && text === "Thinking...") msgDiv.classList.add("thinking");
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return msgDiv;
     }
 
     function checkEnter(event) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            sendMessage();
-        }
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
     }
 </script>
 </body>
