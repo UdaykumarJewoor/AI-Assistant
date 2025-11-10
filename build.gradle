@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.chatAssistant'
+version = '1.0.0'
+description = 'AI Chat Assistant'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/milestone" }
+	maven { url "https://repo.spring.io/snapshot" }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// ✅ Spring AI (includes ChatClient, PromptTemplate)
+	implementation 'org.springframework.ai:spring-ai-core:0.8.1'
+	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter:0.8.1'
+
+	// ✅ Optional (for document context features)
+	implementation 'dev.langchain4j:langchain4j:0.31.0'
+
+	// ✅ Lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// ✅ Testing
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
