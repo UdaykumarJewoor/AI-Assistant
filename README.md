@@ -20,16 +20,9 @@ It has a simple and modern web interface built using HTML, CSS, and JavaScript.
    ```bash
    git clone https://github.com/your-username/AI-Chat-Assistant.git
    cd AI-Chat-Assistant
-Set your API key 
-
-Run the application
-
-./gradlew bootRun
-
-Open in your browser
-
-
-http://localhost:8081
+- Set your API key in config file
+- Run the main application
+- Open in your browser: http://localhost:8081
 
 👨‍💻 Author: uday.techielife@hotmail.com
 
