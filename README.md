@@ -20,15 +20,10 @@ It has a simple and modern web interface built using HTML, CSS, and JavaScript.
    ```bash
    git clone https://github.com/your-username/AI-Chat-Assistant.git
    cd AI-Chat-Assistant
-Set your API key as an environment variable
+Set your API key 
 
-bash
-Copy code
-setx OPENROUTER_API_KEY "sk-your-api-key"
 Run the application
 
-bash
-Copy code
 ./gradlew bootRun
 Open in your browser
 
