@@ -1,4 +1,4 @@
-# 💬 AI Chat Assistant
+# 🤖 AI Chat Assistant
 
 AI Chat Assistant is a Spring Boot web application that connects with OpenRouter’s GPT model to provide an interactive chat experience.  
 It has a simple and modern web interface built using HTML, CSS, and JavaScript.
